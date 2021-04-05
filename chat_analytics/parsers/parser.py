@@ -7,8 +7,8 @@ from chat_analytics.models.chat import Chat
 
 
 class Parser(ABC):
-    def __init__(self, folder):
-        self.folder = folder
+    def __init__(self, folder: str):
+        self.folder: str = folder
 
     def parse(self) -> Chat:
         chat = Chat()
