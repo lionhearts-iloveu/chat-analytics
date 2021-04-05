@@ -1,4 +1,5 @@
-topics: "./data/topics.topics.yaml"
+topics: "./data/config/topics.yaml"
 facebook: "./data/messages/facebook"
 instagram: "./data/messages/instagram"
 whatsapp: "./data/messages/whatsapp"
+senders: "./data/config/senders.yaml"

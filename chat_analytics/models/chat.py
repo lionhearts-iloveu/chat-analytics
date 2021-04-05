@@ -1,6 +1,8 @@
+from collections import defaultdict
 from typing import List, Union
 
 from chat_analytics.models.message import Message
+from chat_analytics.models.topic import Topic
 
 
 class Chat:
@@ -15,3 +17,12 @@ class Chat:
 
     def add_messages(self, messages: List[Message]):
         self.messages += messages
+
+    def get_count(self, topics: List[Topic]) -> dict:
+        data = defaultdict(list)
+        for msg in self.messages:
+            data["sender"].append(msg.sender)
+            data["date_ms"].append(msg.date_ms)
+            for topic in topics:
+                data[topic.name].append(msg.count(topic))
+        return data

@@ -2,22 +2,29 @@ import re
 from datetime import datetime
 from typing import List, Union
 
+import nltk
 from nltk.stem.snowball import SnowballStemmer
 from nltk.tokenize import word_tokenize
 import unidecode
 
+from chat_analytics.config.config import config
 from chat_analytics.models.topic import Topic
+
+nltk.download('punkt')
 
 
 class Message:
     def __init__(self, sender: str = "", content: str = "", data_ms: datetime = None):
-        self.sender: str = sender
-        self.content: str = self.normalize(content)
+        self.sender = self.map_sender(sender)
+        self.content = content
+        self.normalized_content: str = self.normalize(content)
         self.en_content: List[str] = self.tokenize(content, "english")
         self.fr_content: List[str] = self.tokenize(content, "french")
         self.date_ms: datetime = data_ms
 
     def add_content(self, content: str):
+        self.content += content
+        self.normalized_content += self.normalize(content)
         self.en_content += self.tokenize(content, "english")
         self.fr_content += self.tokenize(content, "french")
 
@@ -32,14 +39,21 @@ class Message:
         return count
 
     def count_token(self, substring: str) -> int:
-        return max(self.count_match(self.en_content, self.tokenize(substring, "english")),
-                   self.count_match(self.fr_content, self.tokenize(substring, "french")))
+        return max(self.count_match(self.tokenize(substring, "english"), self.en_content),
+                   self.count_match(self.tokenize(substring, "french"), self.fr_content))
 
     def count_simple(self, substring: str) -> int:
-        return self.content.count(self.normalize(substring))
+        return self.content.count(substring)
 
     def count_regex(self, substring: str) -> int:
-        return len(re.findall(substring, self.content))
+        return len(re.findall(substring, self.normalized_content))
+
+    @staticmethod
+    def map_sender(sender: str):
+        for k in config.senders:
+            if k in sender.lower():
+                return config.senders[k]
+        return sender
 
     @staticmethod
     def normalize(string: str) -> str:
@@ -54,6 +68,8 @@ class Message:
     @staticmethod
     def count_match(phrase: List[str], text: List[str]) -> int:
         count = 0
+        if not text:
+            return 0
         for i in range(len(text) - len(phrase) + 1):
             if Message.match(text[i], phrase[0]):
                 is_phrase_match = True

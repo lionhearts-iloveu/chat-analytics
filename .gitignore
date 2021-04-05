@@ -132,4 +132,4 @@ dmypy.json
 .pyre/
 
 # data
-data/messages/
+data/
