@@ -132,6 +132,8 @@ dmypy.json
 .pyre/
 
 # data
-data/
+data/messages/
+data/config/senders.yaml
 
-!data/config/topics.yaml
+.DS_Store
+
