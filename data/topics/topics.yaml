@@ -1,0 +1,10 @@
+love:
+  token:
+    - love
+    - aime
+
+haha.regex: "(ha|ah)[ah]+"
+
+❤️.simple:
+  - "❤️"
+  - "💚"

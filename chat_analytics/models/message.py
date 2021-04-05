@@ -6,6 +6,8 @@ from nltk.stem.snowball import SnowballStemmer
 from nltk.tokenize import word_tokenize
 import unidecode
 
+from chat_analytics.models.topic import Topic
+
 
 class Message:
     def __init__(self, sender: str = "", content: str = "", data_ms: datetime = None):
@@ -19,8 +21,15 @@ class Message:
         self.en_content += self.tokenize(content, "english")
         self.fr_content += self.tokenize(content, "french")
 
-    def count(self, substring: str):
-        return max(self.count_reg(substring), self.count_simple(substring), self.count_token(substring))
+    def count(self, topic: Topic):
+        count = 0
+        for regex in topic.regex:
+            count += self.count_regex(regex)
+        for simple in topic.simple:
+            count += self.count_simple(simple)
+        for token in topic.token:
+            count += self.count_token(token)
+        return count
 
     def count_token(self, substring: str) -> int:
         return max(self.count_match(self.en_content, self.tokenize(substring, "english")),
@@ -29,7 +38,7 @@ class Message:
     def count_simple(self, substring: str) -> int:
         return self.content.count(self.normalize(substring))
 
-    def count_reg(self, substring: str) -> int:
+    def count_regex(self, substring: str) -> int:
         return len(re.findall(substring, self.content))
 
     @staticmethod

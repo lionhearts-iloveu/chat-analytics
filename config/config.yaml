@@ -1,0 +1,4 @@
+topics: "./data/topics.topics.yaml"
+facebook: "./data/messages/facebook"
+instagram: "./data/messages/instagram"
+whatsapp: "./data/messages/whatsapp"
