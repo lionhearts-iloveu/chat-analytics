@@ -8,9 +8,12 @@
 
 ## Install
 
-Run `pip install -r requirements`
+Run `pip3 install -r requirements.txt`
 
 ## Run
 
 Run `python3 chat_analytics`
 
+## update PYTHONPATH
+
+`export PYTHONPATH="$PYTHONPATH:YOUR_PROJECT_PATH"`
