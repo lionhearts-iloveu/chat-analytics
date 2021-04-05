@@ -1,11 +1,13 @@
+# feeling love
 love:
   token:
     - love
     - aime
 
-haha:
-  regex:
-    "(ha|ah)[ah]+"
+amour:
+  token:
+    - amour
+    - love
 
 ❤️:
   simple:
@@ -30,3 +32,114 @@ haha:
     - "💟"
     - "♡"
     - "♥︎"
+
+😍🥰😘:
+  simple:
+    - "😍"
+    - "🥰"
+    - "😘"
+
+aww:
+  regex:
+    "aw[w]*"
+
+tellement:
+  token:
+    - tellement
+    - enormement
+    - beaucoup
+    - folie
+    - passionement
+    - moon
+    - que tout
+
+# feeling miss you
+
+manque:
+  token:
+    - manque
+
+🥺:
+  simple:
+    - "🥺"
+
+# feeling memories
+
+✨☄️🏎💞:
+  simple:
+    - "🏎💞"
+    - "🏎☄️"
+    - "🏎✨"
+    - "💞🏎"
+    - "☄️🏎"
+    - "✨🏎"
+
+🥨🍫:
+  simple:
+    - "🥨"
+    - "🍫"
+
+# feeling laugh
+
+haha:
+  regex:
+    "(ha|ah)[ah]+"
+
+😂🤣😆:
+  simple:
+    - "😂"
+    - "🤣"
+    - "😆"
+    - "😛"
+    - "😝"
+    - "😜"
+    - "🤪"
+
+# feeling attracted
+
+hehe:
+  regex:
+    "(he|eh)[eh]+"
+
+🔥🦁🤠:
+  simple:
+    - "🔥"
+    - "🦁"
+    - "🤠"
+    - "😏"
+    - "😇"
+    - "😻"
+
+
+# feeling happy
+
+😊:
+  simple:
+    - "😂"
+    - "🤣"
+    - "😆"
+    - "😁"
+    - "😀"
+    - "😃"
+    - "😄"
+    - "😄"
+    - "😅"
+    - "☺️"
+    - "😊"
+    - "🙂"
+    - "🙃"
+    - "😌"
+
+😉:
+  simple:
+    - "😉"
+
+# feeling kisses
+
+💋:
+  simple:
+    - "💋"
+    - "😘"
+    - "😗"
+    - "😙"
+    - "😚"
