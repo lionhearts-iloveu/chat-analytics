@@ -18,6 +18,14 @@ love:
     - ressen
     - adore
     - like
+    - tellement
+    - enormement
+    - beaucoup
+    - folie
+    - passionement
+    - moon
+    - que tout
+    - genereux
   simple:
     - "❤️"
     - "💚"
@@ -40,21 +48,11 @@ love:
     - "💟"
     - "♡"
     - "♥︎"
-  simple:
     - "😍"
     - "🥰"
     - "😘"
   regex:
     "aw[w]*"
-  token:
-    - tellement
-    - enormement
-    - beaucoup
-    - folie
-    - passionement
-    - moon
-    - que tout
-    - genereux
 
 miss:
   token:
