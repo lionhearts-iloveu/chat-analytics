@@ -2,6 +2,7 @@ from pandas import DataFrame
 
 from chat_analytics.config.config import config
 from chat_analytics.models.chat import Chat
+from chat_analytics.parsers.instagram import instagramParser
 from chat_analytics.parsers.whatsapp import whatsappParser
 
 
@@ -15,4 +16,5 @@ def analise_chat(chat: Chat):
 def load_chat() -> Chat:
     chat = Chat()
     chat.add_chat(whatsappParser.parse())
+    chat.add_chat(instagramParser.parse())
     return chat
