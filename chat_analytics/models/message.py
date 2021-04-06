@@ -1,11 +1,11 @@
 import re
 from collections import Counter
 from datetime import datetime
-from typing import List, Union
+from typing import List
 
 from chat_analytics.config.config import config
 from chat_analytics.models.topic import Topic
-from chat_analytics.utils.stemmer import normalize, stemming
+from chat_analytics.utils.nlp import normalize, stemming
 
 
 class Message:
@@ -15,8 +15,14 @@ class Message:
         self.normalized_content: str = normalize(content)
         self.en_content: List[str] = stemming(content, "english")
         self.fr_content: List[str] = stemming(content, "french")
-        self.date_ms: datetime = data_ms
+        self.msg_datetime: datetime = data_ms
         self.app = app
+
+    def get_date(self):
+        return self.msg_datetime.date()
+
+    def get_datetime(self):
+        return self.msg_datetime
 
     def add_content(self, content: str) -> None:
         self.content += content
@@ -35,7 +41,13 @@ class Message:
         return count
 
     def count_words(self) -> Counter:
-        pass
+        words = list()
+        for en_word, fr_word in zip(self.en_content, self.fr_content):
+            # add the shortest stemmed word
+            if en_word in config.stopwords or fr_word in config.stopwords:
+                continue
+            words.append(fr_word if len(fr_word) < len(en_word) else en_word)
+        return Counter(words)
 
     def count_token(self, token_en: List[str], token_fr:  List[str]) -> int:
         return max(self.count_match(token_en, self.en_content),

@@ -1,6 +1,6 @@
 from typing import List, Union
 
-from chat_analytics.utils.stemmer import stemming
+from chat_analytics.utils.nlp import stemming
 
 
 class Topic:

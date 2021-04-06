@@ -2,6 +2,7 @@ from typing import List
 
 from nltk.stem.snowball import SnowballStemmer
 from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
 import unidecode
 
 
@@ -17,3 +18,4 @@ def tokenize(string: str) -> List[str]:
 
 def normalize(string: str) -> str:
     return unidecode.unidecode(string).lower()
+

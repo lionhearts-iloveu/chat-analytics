@@ -1,7 +1,8 @@
 from pathlib import Path
-from typing import List, Dict
+from typing import List, Dict, Set
 
 import yaml
+from nltk.corpus import stopwords
 
 from chat_analytics.models.topic import Topic
 
@@ -18,7 +19,10 @@ class Config:
         self.instagram_folder: str = parsed['instagram']
         self.whatsapp_folder: str = parsed['whatsapp']
         self.cache_chat: str = parsed['cache_chat']
-        self.cache_df: str = parsed['cache_df']
+        self.cache_df_topics: str = parsed['cache_df_topics']
+        self.cache_df_words: str = parsed['cache_df_words']
+        self.stopwords: Set[str] = set()
+        self.load_stopwords(parsed['stopwords'])
         self.mkdir_caches()
 
     def load_topics(self, filename: str):
@@ -33,7 +37,14 @@ class Config:
 
     def mkdir_caches(self):
         Path(self.cache_chat).mkdir(parents=True, exist_ok=True)
-        Path(self.cache_df).mkdir(parents=True, exist_ok=True)
+        Path(self.cache_df_topics).mkdir(parents=True, exist_ok=True)
+        Path(self.cache_df_words).mkdir(parents=True, exist_ok=True)
 
+    def load_stopwords(self, filename: str):
+        self.stopwords = set(list(stopwords.words('french'))
+                             + list(stopwords.words('english')))
+        with open(filename) as file:
+            for word in file:
+                self.stopwords.add(word.strip())
 
 config = Config()

@@ -6,6 +6,7 @@ from typing import List
 
 from chat_analytics.config.config import config
 from chat_analytics.models.chat import Chat
+from chat_analytics.utils.cache import apply_cache
 
 
 class Parser(ABC):
@@ -16,15 +17,7 @@ class Parser(ABC):
     def parse(self) -> Chat:
         chat = Chat()
         for filename in self.get_all_filenames():
-            cached_path = self.get_cached_path(filename)
-            if exists(cached_path):
-                with open(cached_path, "rb") as cache:
-                    sub_chat = load(cache)
-            else:
-                sub_chat = self.parse_file(join(self.folder, filename))
-                with open(cached_path, "wb") as cache:
-                    dump(sub_chat, cache)
-            chat.add_chat(sub_chat)
+            chat.add_chat(self.parse_file(join(self.folder, filename)))
         return chat
 
     @abstractmethod
