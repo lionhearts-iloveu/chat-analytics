@@ -1,5 +1,5 @@
 # feeling love
-love:
+iloveu:
   token:
     - love
     - aime
@@ -8,6 +8,15 @@ amour:
   token:
     - amour
     - love
+    - kiss
+    - bisou
+    - cuddle
+    - calin
+    - hold
+    - arm
+    - sentir
+    - feeling
+    - ressen
 
 ❤️:
   simple:
@@ -52,12 +61,18 @@ tellement:
     - passionement
     - moon
     - que tout
+    - genereux
 
 # feeling miss you
 
 manque:
   token:
     - manque
+    - wait
+    - miss
+    - soon
+    - bientot
+    - nuit
 
 🥺:
   simple:
@@ -80,6 +95,13 @@ manque:
     - "🍫"
 
 # feeling laugh
+funny:
+  token:
+    - drole
+    - good
+    - funny
+    - nice
+    - laugh
 
 haha:
   regex:
@@ -101,6 +123,28 @@ hehe:
   regex:
     "(he|eh)[eh]+"
 
+hot:
+  token:
+    - hot
+    - sex
+    - lick
+    - ear
+    - chaud
+    - lick
+    - oreille
+    - bisou
+    - kiss
+    - smell
+    - odeur
+    - undie
+    - culotte
+    - sentir
+    - feeling
+    - touch
+    - ressen
+    - lion
+    - dirty
+
 🔥🦁🤠:
   simple:
     - "🔥"
@@ -108,10 +152,18 @@ hehe:
     - "🤠"
     - "😏"
     - "😇"
+    - "😉"
     - "😻"
 
-
 # feeling happy
+
+happy:
+  token:
+    - happy
+    - lucky
+    - heureu
+    - chance
+    - content
 
 😊:
   simple:
@@ -130,10 +182,6 @@ hehe:
     - "🙃"
     - "😌"
 
-😉:
-  simple:
-    - "😉"
-
 # feeling kisses
 
 💋:
@@ -143,3 +191,18 @@ hehe:
     - "😗"
     - "😙"
     - "😚"
+
+cuddles:
+  token:
+    - kiss
+    - bisou
+    - embrasse
+    - cuddle
+    - calin
+    - hold
+    - arm
+    - nuit
+    - night
+    - contre
+    - close
+    - pres
