@@ -23,6 +23,7 @@ class Chat:
         for msg in self.messages:
             data["sender"].append(msg.sender)
             data["date_ms"].append(msg.date_ms)
+            data["app"].append(msg.app)
             for topic in topics:
                 data[topic.name].append(msg.count(topic))
         return data

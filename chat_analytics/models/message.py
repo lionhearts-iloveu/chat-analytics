@@ -2,7 +2,7 @@ import re
 from datetime import datetime
 from typing import List, Union
 
-import nltk
+# import nltk
 from nltk.stem.snowball import SnowballStemmer
 from nltk.tokenize import word_tokenize
 import unidecode
@@ -10,17 +10,18 @@ import unidecode
 from chat_analytics.config.config import config
 from chat_analytics.models.topic import Topic
 
-nltk.download('punkt')
+# nltk.download('punkt')
 
 
 class Message:
-    def __init__(self, sender: str = "", content: str = "", data_ms: datetime = None):
+    def __init__(self, sender: str = "", content: str = "", data_ms: datetime = None, app: str = ""):
         self.sender = self.map_sender(sender)
         self.content = content
         self.normalized_content: str = self.normalize(content)
         self.en_content: List[str] = self.tokenize(content, "english")
         self.fr_content: List[str] = self.tokenize(content, "french")
         self.date_ms: datetime = data_ms
+        self.app = app
 
     def add_content(self, content: str):
         self.content += content
