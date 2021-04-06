@@ -9,13 +9,13 @@ class Chat:
     def __init__(self, messages: Union[List[Message], None] = None):
         self.messages = [] if messages is None else messages
 
-    def add_chat(self, chat):
+    def add_chat(self, chat) -> None:
         self.messages += chat.messages
 
-    def add_message(self, message: Message):
+    def add_message(self, message: Message) -> None:
         self.messages.append(message)
 
-    def add_messages(self, messages: List[Message]):
+    def add_messages(self, messages: List[Message]) -> None:
         self.messages += messages
 
     def get_count(self, topics: List[Topic]) -> dict:
@@ -25,5 +25,5 @@ class Chat:
             data["date_ms"].append(msg.date_ms)
             data["app"].append(msg.app)
             for topic in topics:
-                data[topic.name].append(msg.count(topic))
+                data[topic.name].append(msg.count_for(topic))
         return data

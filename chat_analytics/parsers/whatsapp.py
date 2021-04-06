@@ -9,10 +9,8 @@ from chat_analytics.parsers.parser import Parser
 
 
 class WhatsappParser(Parser):
-    name = "whatsApp"
-
     def __init__(self, folder):
-        super().__init__(folder)
+        super().__init__(folder, "whatsApp")
 
     def parse_file(self, filename: str) -> Chat:
         chat = Chat()
@@ -25,11 +23,10 @@ class WhatsappParser(Parser):
                     message.add_content(line)
         return chat
 
-    @staticmethod
-    def extract_metadata(line: str) -> Tuple[str, str, datetime, str]:
+    def extract_metadata(self, line: str) -> Tuple[str, str, datetime, str]:
         d = datetime.strptime(line[1:21], "%d/%m/%Y, %H:%M:%S")
         sender, content = line[22:].split(":", 1)
-        return sender, content, d, WhatsappParser.name
+        return sender, content, d, self.name
 
     @staticmethod
     def _is_new_message(line: str) -> bool:

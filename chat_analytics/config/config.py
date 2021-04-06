@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import List, Dict
 
 import yaml
@@ -16,6 +17,9 @@ class Config:
         self.facebook_folder: str = parsed['facebook']
         self.instagram_folder: str = parsed['instagram']
         self.whatsapp_folder: str = parsed['whatsapp']
+        self.cache_chat: str = parsed['cache_chat']
+        self.cache_df: str = parsed['cache_df']
+        self.mkdir_caches()
 
     def load_topics(self, filename: str):
         with open(filename) as file:
@@ -26,5 +30,10 @@ class Config:
     def load_senders(self, filename: str):
         with open(filename) as file:
             self.senders = yaml.load(file, Loader=yaml.SafeLoader)
+
+    def mkdir_caches(self):
+        Path(self.cache_chat).mkdir(parents=True, exist_ok=True)
+        Path(self.cache_df).mkdir(parents=True, exist_ok=True)
+
 
 config = Config()

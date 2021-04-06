@@ -1,9 +1,8 @@
-from chat_analytics.services.chat_analytics import load_chat, analise_chat
+from chat_analytics.services.chat_analytics import analise_chat
 
 
 def main():
-    chat = load_chat()
-    analise_chat(chat)
+    analise_chat()
 
 
 if __name__ == '__main__':
