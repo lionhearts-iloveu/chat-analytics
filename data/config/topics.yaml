@@ -4,7 +4,7 @@ iloveu:
     - love
     - aime
 
-amour:
+love:
   token:
     - amour
     - love
@@ -17,8 +17,8 @@ amour:
     - sentir
     - feeling
     - ressen
-
-❤️:
+    - adore
+    - like
   simple:
     - "❤️"
     - "💚"
@@ -41,18 +41,12 @@ amour:
     - "💟"
     - "♡"
     - "♥︎"
-
-😍🥰😘:
   simple:
     - "😍"
     - "🥰"
     - "😘"
-
-aww:
   regex:
     "aw[w]*"
-
-tellement:
   token:
     - tellement
     - enormement
@@ -65,7 +59,7 @@ tellement:
 
 # feeling miss you
 
-manque:
+miss:
   token:
     - manque
     - wait
@@ -73,14 +67,11 @@ manque:
     - soon
     - bientot
     - nuit
-
-🥺:
+    - hate
   simple:
     - "🥺"
 
-# feeling memories
-
-✨☄️🏎💞:
+f1:
   simple:
     - "🏎💞"
     - "🏎☄️"
@@ -88,26 +79,34 @@ manque:
     - "💞🏎"
     - "☄️🏎"
     - "✨🏎"
+  token:
+    - f1
+    - spider
 
-🥨🍫:
+bretzel:
   simple:
     - "🥨"
     - "🍫"
+  token:
+    - bretzel
+    - pretzel
+    - egg
+    - relationship
+    - serieu
+    - paques
+    - boule d or
+    - truffe
+    - chocolat
 
-# feeling laugh
-funny:
+fun:
   token:
     - drole
     - good
     - funny
     - nice
     - laugh
-
-haha:
   regex:
     "(ha|ah)[ah]+"
-
-😂🤣😆:
   simple:
     - "😂"
     - "🤣"
@@ -117,13 +116,9 @@ haha:
     - "😜"
     - "🤪"
 
-# feeling attracted
-
-hehe:
+attraction:
   regex:
     "(he|eh)[eh]+"
-
-hot:
   token:
     - hot
     - sex
@@ -138,6 +133,8 @@ hot:
     - odeur
     - undie
     - culotte
+    - en toi
+    - envie de toi
     - sentir
     - feeling
     - touch
@@ -148,9 +145,6 @@ hot:
     - belle
     - handsome
     - beautiful
-
-
-🔥🦁🤠:
   simple:
     - "🔥"
     - "🦁"
@@ -158,8 +152,6 @@ hot:
     - "😏"
     - "😇"
     - "😻"
-
-# feeling happy
 
 happy:
   token:
@@ -169,8 +161,6 @@ happy:
     - chance
     - meilleur
     - content
-
-😊:
   simple:
     - "😂"
     - "🤣"
@@ -187,17 +177,13 @@ happy:
     - "🙃"
     - "😌"
 
-# feeling kisses
-
-💋:
+cuddles:
   simple:
     - "💋"
     - "😘"
     - "😗"
     - "😙"
     - "😚"
-
-cuddles:
   token:
     - kiss
     - bisou
@@ -211,3 +197,5 @@ cuddles:
     - contre
     - close
     - pres
+    - adore
+    - wait
