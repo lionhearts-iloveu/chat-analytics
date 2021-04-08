@@ -24,11 +24,12 @@ class Chat:
     def get_count_per_topics(self, topics: List[Topic]) -> dict:
         data = defaultdict(list)
         for msg in self.messages:
-            data["#sender#"].append(msg.sender)
-            data["#datetime#"].append(msg.get_datetime())
-            data["#app#"].append(msg.app)
             for topic in topics:
-                data[topic.name].append(msg.count_for(topic))
+                data["sender"].append(msg.sender)
+                data["datetime"].append(msg.get_datetime())
+                data["app"].append(msg.app)
+                data["topic"].append(topic.name)
+                data["count"].append(msg.count_for(topic))
         return data
 
     def get_count(self) -> Dict[str, list]:
@@ -43,10 +44,11 @@ class Chat:
 
         for key in tmp.keys():
             sender, d, app = key
-            data["#sender#"].append(sender)
-            data["#date#"].append(d)
-            data["#app#"].append(app)
             for word in all_words:
-                data[word].append(tmp[key][word])
+                data["sender"].append(sender)
+                data["date"].append(d)
+                data["app"].append(app)
+                data["word"].append(word)
+                data["count"].append(tmp[key][word])
         return data
 

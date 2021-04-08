@@ -1,8 +1,7 @@
-from collections import defaultdict, Counter
+from collections import Counter
 from datetime import date
-from os.path import join, exists
-from pickle import load, dump
-from typing import Tuple, Dict, List, Set
+from os.path import join
+from typing import Tuple, Dict
 
 import pandas as pd
 from pandas import DataFrame
@@ -17,10 +16,8 @@ PARSERS = [instagramParser, whatsappParser]
 
 def analise_chat():
     df_topics, df_words = get_counts()
-    for topic in config.topics:
-        tmp = df_topics.groupby("#sender#")[topic.name].sum()
-        print(topic.name, str(tmp))
-    print(df_words.sum(numeric_only=True).sort_values(ascending=False)[0:50])
+    print(df_topics.groupby(["topic", "sender"])["count"].sum())
+    print(df_words.groupby("word")["count"].sum().nlargest(50))
 
 
 def get_counts() -> Tuple[DataFrame, DataFrame]:
@@ -37,7 +34,7 @@ def compute_counts_topics(chat) -> DataFrame:
     return DataFrame(chat.get_count_per_topics(config.topics))
 
 
-def compute_counts_words(chat) -> Dict[Tuple[str, date, str], Counter]:
+def compute_counts_words(chat) -> DataFrame:
     return DataFrame(chat.get_count())
 
 
