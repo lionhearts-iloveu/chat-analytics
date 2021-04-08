@@ -1,3 +1,4 @@
+from calendar import calendar
 from collections import defaultdict, Counter
 from datetime import date
 from typing import List, Union, Dict, Tuple, Set
@@ -21,12 +22,20 @@ class Chat:
     def add_messages(self, messages: List[Message]) -> None:
         self.messages += messages
 
-    def get_count_per_topics(self, topics: List[Topic]) -> dict:
+    def get_count_per_topics(self, topics: List[Topic]) -> Dict[str, list]:
         data = defaultdict(list)
         for msg in self.messages:
             for topic in topics:
+                d = msg.get_datetime()
                 data["sender"].append(msg.sender)
-                data["datetime"].append(msg.get_datetime())
+                data["datetime"].append(d)
+                data["date"].append(d.date())
+                data["weekday"].append(d.weekday())
+                data["day"].append(d.day)
+                data["month"].append(d.month)
+                data["year"].append(d.year)
+                data["hour"].append(d.hour)
+                data["minute"].append(d.minute)
                 data["app"].append(msg.app)
                 data["topic"].append(topic.name)
                 data["count"].append(msg.count_for(topic))
@@ -47,6 +56,10 @@ class Chat:
             for word in all_words:
                 data["sender"].append(sender)
                 data["date"].append(d)
+                data["weekday"].append(d.weekday())
+                data["day"].append(d.day)
+                data["month"].append(d.month)
+                data["year"].append(d.year)
                 data["app"].append(app)
                 data["word"].append(word)
                 data["count"].append(tmp[key][word])

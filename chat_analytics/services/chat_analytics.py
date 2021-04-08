@@ -1,5 +1,3 @@
-from collections import Counter
-from datetime import date
 from os.path import join
 from typing import Tuple, Dict
 
@@ -14,10 +12,25 @@ from chat_analytics.utils.cache import apply_cache
 PARSERS = [instagramParser, whatsappParser]
 
 
+def get_senders():
+    return list(DF_TOPICS["sender"].unique())
+
+
 def analise_chat():
-    df_topics, df_words = get_counts()
-    print(df_topics.groupby(["topic", "sender"])["count"].sum())
-    print(df_words.groupby("word")["count"].sum().nlargest(50))
+    print(DF_TOPICS.groupby(["topic", "sender"])["count"].sum())
+    # print(DF_WORDS.groupby("word")["count"].sum().nlargest(50))
+    print(get_weekly("love"))
+
+
+def get_weekly(topic_name):
+    return DF_TOPICS[DF_TOPICS["topic"] == topic_name].groupby(["sender", "weekday"])["count"].sum().reset_index()
+
+
+def get_count_per_topic(sender):
+    if sender is None:
+        return DF_TOPICS.groupby("topic")["count"].sum().reset_index()
+    else:
+        return DF_TOPICS[DF_TOPICS["sender"] == sender].groupby("topic")["count"].sum().reset_index()
 
 
 def get_counts() -> Tuple[DataFrame, DataFrame]:
@@ -40,3 +53,6 @@ def compute_counts_words(chat) -> DataFrame:
 
 def get_cached_path(parser_name):
     return join(config.cache_df, parser_name + ".pickle")
+
+
+DF_TOPICS, DF_WORDS = get_counts()
