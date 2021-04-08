@@ -1,12 +1,10 @@
 from abc import ABC, abstractmethod
 from os import listdir
-from os.path import isfile, join, exists
-from pickle import load, dump
+from os.path import isfile, join
 from typing import List
 
 from chat_analytics.config.config import config
 from chat_analytics.models.chat import Chat
-from chat_analytics.utils.cache import apply_cache
 
 
 class Parser(ABC):

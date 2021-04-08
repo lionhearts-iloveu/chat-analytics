@@ -1,5 +1,4 @@
-from collections import Counter
-from datetime import date
+import calendar
 from os.path import join
 from typing import Tuple, Dict
 
@@ -7,17 +6,51 @@ import pandas as pd
 from pandas import DataFrame
 
 from chat_analytics.config.config import config
+from chat_analytics.parsers.facebook import facebookParser
 from chat_analytics.parsers.instagram import instagramParser
 from chat_analytics.parsers.whatsapp import whatsappParser
 from chat_analytics.utils.cache import apply_cache
 
-PARSERS = [instagramParser, whatsappParser]
+PARSERS = [instagramParser, whatsappParser, facebookParser]
+
+
+def get_senders():
+    return list(DF_TOPICS["sender"].unique())
 
 
 def analise_chat():
-    df_topics, df_words = get_counts()
-    print(df_topics.groupby(["topic", "sender"])["count"].sum())
-    print(df_words.groupby("word")["count"].sum().nlargest(50))
+    print(DF_TOPICS.groupby(["topic", "sender"])["count"].sum())
+    # print(DF_WORDS.groupby("word")["count"].sum().nlargest(50))
+    print(get_weekly("love"))
+
+
+def get_weekly(topic_name):
+    df = DF_TOPICS[DF_TOPICS["topic"] == topic_name].groupby(["sender", "date", "weekday"])["count"].sum().reset_index()
+    n_days = len(df["date"].unique())
+    df = df.groupby(["sender", "weekday"])["count"].sum().reset_index()
+    df["weekday_str"] = df["weekday"].apply(lambda weekday: calendar.day_abbr[weekday])
+    df["count"] = df["count"].apply(lambda c:c / n_days)
+    return df
+
+
+def get_hourly(topic_name):
+    df = DF_TOPICS[DF_TOPICS["topic"] == topic_name].groupby(["sender", "date", "hour"])["count"].sum().reset_index()
+    n_days = len(df["date"].unique())
+    df = df.groupby(["sender", "hour"])["count"].sum().reset_index()
+    df["count"] = df["count"].apply(lambda c: c / n_days)
+    return df
+
+
+def get_trend(topic_name):
+    df = DF_TOPICS[DF_TOPICS["topic"] == topic_name].groupby(["sender", "date"])["count"].sum().reset_index()
+    return df
+
+
+def get_count_per_topic(sender):
+    if sender is None:
+        return DF_TOPICS.groupby("topic")["count"].sum().reset_index()
+    else:
+        return DF_TOPICS[DF_TOPICS["sender"] == sender].groupby("topic")["count"].sum().reset_index()
 
 
 def get_counts() -> Tuple[DataFrame, DataFrame]:
@@ -40,3 +73,6 @@ def compute_counts_words(chat) -> DataFrame:
 
 def get_cached_path(parser_name):
     return join(config.cache_df, parser_name + ".pickle")
+
+
+DF_TOPICS, DF_WORDS = get_counts()
